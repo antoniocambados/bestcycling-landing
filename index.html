@@ -238,13 +238,6 @@
             text-align: center;
         }
 
-        iframe {
-            aspect-ratio: 16 / 9;
-            display: block;
-            margin: 0 auto;
-            width: clamp(380px, 640px, 66vw);
-        }
-
         #code-section {
             scroll-margin: 1.5rem;
         }
@@ -270,12 +263,6 @@
 
             .kpis {
                 grid-template-columns:1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            iframe {
-                width: 100%;
             }
         }
 
@@ -415,10 +402,16 @@
             width: clamp(380px, 640px, 66vw);
             aspect-ratio: 16 / 9;
             margin: 0 auto;
-            border-radius: 14px;
+            border-radius: 0.5rem;
             overflow: hidden;
             cursor: pointer;
             background: #000;
+        }
+
+        @media (max-width: 480px) {
+            .yt-lite {
+                width: 100%;
+            }
         }
 
         .yt-lite.lazyloaded {
