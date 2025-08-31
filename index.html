@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Tu código Bestcycling — Clases de ciclo indoor a tu ritmo</title>
+    <meta name="description"
+          content="Consigue un 20% en tu primera suscripción anual a Bestcycling con mi código de invitación. Clases de ciclo indoor motivadoras, planes y app multiplataforma.">
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="Tu código Bestcycling — 20% de descuento"/>
+    <meta property="og:description"
+          content="Usa mi código y ahorra en Bestcycling. Yo también gano puntos y 1 mes gratis. ¡Gracias!">
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://TU-USUARIO.github.io/TU-REPO/"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta corporativa (naranja Bestcycling sobre base antracita) */
+            --bg: #1b1f26; /* fondo principal */
+            --card: #232834; /* tarjetas ligeramente más claras */
+            --muted: #d8e1ee; /* texto secundario */
+            --text: #ffffff; /* texto principal */
+            --brand: #ff7a00; /* naranja vivo */
+            --brand2: #ffb703; /* ámbar de apoyo */
+            --ok: #22c55e; /* verde éxito */
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+            font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(1200px 800px at 10% -10%, rgba(255, 122, 0, .22) 0%, rgba(255, 122, 0, 0) 60%),
+            radial-gradient(900px 700px at 100% -10%, rgba(255, 183, 3, .18) 0%, rgba(255, 183, 3, 0) 60%),
+            linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, 0) 40%),
+            var(--bg);
+            background-repeat: no-repeat !important;
+        }
+
+        a {
+            color: var(--brand);
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .logo {
+            font-weight: 800;
+            letter-spacing: .2px;
+        }
+
+        .badge {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            background: linear-gradient(135deg, var(--brand), var(--brand2));
+            color: #1a0c00;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .85rem;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns:1.1fr .9fr;
+            gap: 28px;
+            align-items: self-end;
+            padding: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4.2vw, 3.2rem);
+            line-height: 1.05;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .hero .foot {
+            font-size: 0.8rem;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .00));
+            border: 1px solid rgba(255, 255, 255, .16);
+            border-radius: 18px;
+            padding: 18px;
+        }
+
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .kpi {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .kpi strong {
+            font-size: 1.4rem;
+        }
+
+        .cta {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .highlight-text {
+            color: var(--brand);
+        }
+
+        .code {
+            flex: 1;
+            min-width: 220px;
+            background: #262c39;
+            border: 1px dashed rgba(255, 122, 0, .35);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 1.05rem;
+            color: var(--text);
+        }
+
+        .btn {
+            display: inline-block;
+            appearance: none;
+            border: 0;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        /* Botones: se mantienen intactos por tu petición */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brand), var(--brand2));
+            color: #1a0c00;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--brand);
+            border: 1px solid rgba(255, 122, 0, .35);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .feature {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .feature h3 {
+            margin: 0 0 6px;
+        }
+
+        .how {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 22px 0;
+        }
+
+        .quote {
+            font-size: 1.05rem;
+            color: var(--text);
+            border-left: 4px solid var(--brand);
+            padding-left: 14px;
+            margin: 0;
+        }
+
+        .foot {
+            font-size: .9rem;
+            color: var(--muted);
+        }
+
+        footer {
+            opacity: .85;
+            margin: 40px 0;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 122, 0, .16);
+            border: 1px solid rgba(255, 122, 0, .34);
+            border-radius: 999px;
+            padding: 6px 12px;
+            color: #ffe7cc;
+            font-size: .8rem;
+            text-align: center;
+        }
+
+        iframe {
+            aspect-ratio: 16 / 9;
+            display: block;
+            margin: 0 auto;
+            width: clamp(380px, 640px, 66vw);
+        }
+
+        @media (max-width: 980px) {
+            .hero {
+                grid-template-columns:1fr;
+            }
+
+            .grid {
+                grid-template-columns:1fr 1fr;
+            }
+
+            .how {
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns:1fr;
+            }
+
+            .kpis {
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            iframe {
+                width: 100%;
+            }
+        }
+
+        .brand-icon {
+            height: 28px;
+            width: auto;
+            vertical-align: -6px;
+            margin-right: 8px;
+        }
+
+        .brand-wordmark {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div class="logo">
+            <img src="/isologo.png" alt="Bestcycling" class="brand-icon" loading="lazy"/>
+            Bestcycling · Invitación
+        </div>
+        <div class="pill">Cycling · Nutrición · Elíptica · Tonificación · Running</div>
+    </header>
+
+    <section class="hero">
+        <div>
+            <span class="badge">-20% en tu primera suscripción anual</span>
+            <h1>Practica <em>ciclo indoor</em> a tu aire</h1>
+
+            <p>
+                Si estás aquí, probablemente sepas ya qué es Bestcyling y te estás planteando
+                suscribirte. Yo pasé por este mismo dilema 😅.
+            </p>
+
+            <p>
+                Para ayudarte en tu decisión, he decidido crear esta página para compartir contigo
+                mi código de invitación. Con esto <strong class="highlight-text">conseguirás un 20% de descuento</strong>
+                en tu primera suscripción anual (el equivalente a más de 2 meses) y a mí Bestcycling me
+                premiará a cambio con 1 mes gratis.
+            </p>
+            <p>
+                Suena bien ¿no? Yo me beneficié de un código cuando hice mi primera suscripción y
+                reconozco que fue determinante para decidirme.
+            </p>
+
+            <hr>
+
+            <p>
+                Si has llegado aquí sin tener ni idea de qué es Bestcycling, te dejo más información en los recuadros informativos,
+                además de una clase de ejemplo para que puedas tomarle el pulso a lo que te encontrarás si decides unirte.
+            </p>
+
+            <h2 style="margin: 2rem 0 1rem 0;">¿Te animas, <em>bestciclista</em>?</h2>
+
+            <p>
+                Con Bestcycling siempre tendrás un motivo para abrir la aplicación y animarte a hacer un entrenamiento:
+            </p>
+
+            <div class="kpis">
+                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Sin aburrimiento</span><br><strong>Hasta 4</strong><br><span class="foot">clases nuevas por semana</span></div>
+                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Flexibilidad</span><br><strong>20–65'</strong><br><span class="foot">por clase y varios niveles</span></div>
+                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Una pedalada más</span><br><strong>Motivación</strong><br><span class="foot">con instructores y músicas geniales</span></div>
+            </div>
+        </div>
+
+        <section class="card">
+            <h2 style="margin-top: 0;">Mi código, tu código</h2>
+            <p>
+                Con mi código obtienes <b>20% de descuento en tu primera
+                suscripción anual</b> y yo gano puntos y <b>1 mes gratis</b> por cada alta.
+                ¡Gracias por apoyarme! *
+            </p>
+            <div class="cta">
+                <input id="code" class="code" aria-label="Código de invitación" value="DKMyUc"/>
+                <button class="btn btn-primary" onclick="copyCode()">Copiar código</button>
+                <a class="btn btn-ghost"
+                   href="https://links.bestcycling.com/DKMyUc" target="_blank"
+                   rel="noopener">Canjear en Bestcycling</a>
+            </div>
+
+            <h2>Cómo usar el código</h2>
+            <div class="how">
+                <div class="feature">
+                    <h3>1: Copia el código</h3>
+                    <p class="foot">Pulsa “Copiar código” y llévalo en el portapapeles.</p>
+                </div>
+                <div class="feature">
+                    <h3>2: Suscríbete desde la web</h3>
+                    <p class="foot">Abre la página de suscripción y pega el código en <em>CÓDIGO DE DESCUENTO</em> antes de
+                        pagar.
+                    </p>
+                    <p class="foot">Los códigos solo se canjean en la web.</p>
+                </div>
+            </div>
+            <a class="btn btn-primary" href="https://links.bestcycling.com/DKMyUc"
+               target="_blank" rel="noopener">Ir a la suscripción</a>
+        </section>
+    </section>
+
+    <div class="card">
+        <img class="brand-wordmark" src="/logo.png"
+             alt="Bestcycling (logotipo oficial)" loading="lazy"/>
+        <h3 style="margin:0 0 8px">¿Por qué Bestcycling?</h3>
+
+        <div class="grid">
+            <div class="feature">
+                <h3>Catálogo enorme</h3>
+                <p class="foot">Cientos de clases con distintos niveles y objetivos.</p>
+            </div>
+            <div class="feature">
+                <h3>Siempre fresco</h3>
+                <p class="foot">Hasta 4 sesiones nuevas cada semana para que no te aburras.</p>
+            </div>
+            <div class="feature">
+                <h3>Más que bici</h3>
+                <p class="foot">Yoga, pilates, HIIT, fuerza, running (cinta y aire libre), elíptica, mindfulness y plan de nutrición.</p>
+            </div>
+            <div class="feature">
+                <h3>Conecta tus dispositivos</h3>
+                <p class="foot">Compatibilidad con biciletas, pulsómetros y Apple Watch.</p>
+            </div>
+            <div class="feature">
+                <h3>Sin conexión</h3>
+                <p class="foot">Descarga las clases y entrena donde quieras, incluso sin internet.</p>
+            </div>
+            <div class="feature">
+                <h3>En cualquier pantalla</h3>
+                <p class="foot">Versión web además de apps para iPhone, iPad, Android, Windows y macOS.</p>
+            </div>
+        </div>
+
+        <h3>Para muestra, un botón</h3>
+
+        <iframe src="https://www.youtube.com/embed/_fyEyLth664?si=f52K5hOC1U8i7nfT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <section class="foot" style="margin-top:3rem">
+        <p>* Oferta y mecánica del programa de invitaciones según Bestcycling a fecha 31/08/2025.</p>
+        <p>Más información</p>
+        <ul>
+            <li>
+                Beneficios / Referidos y Afiliados: <a href="https://bestcycling.com/page/beneficios" target="_blank">bestcycling.com/page/beneficios</a></li>
+            <li>
+                Planes de suscripción: <a href="https://bestcycling.com/subscription/new?plan=particulares" target="_blank">bestcycling.com/subscription/new</a>
+            </li>
+            <li>
+                Dispositivos compatibles: <a href="https://www.bestcycling.com/page/compatibilidad" target="_blank">bestcycling.com/page/compatibilidad</a>
+            </li>
+            <li>
+                Preguntas frecuentes: <a href="https://bestcycling.com/pages/preguntas-frecuentes" target="_blank">bestcycling.com/pages/preguntas-frecuentes</a>
+            </li>
+        </ul>
+    </section>
+
+    <footer class="foot">
+        <hr style="border-color:rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.12)">
+        <p>Hecho con ❤️ para la comunidad Bestcycling. Esta no es una página oficial ni yo estoy relacionado de ninguna forma con Bestcycling.</p>
+    </footer>
+</div>
+
+<script>
+    function copyCode() {
+        const el = document.getElementById('code');
+        el.select();
+        el.setSelectionRange(0, 99999);
+        try {
+            document.execCommand('copy');
+        } catch (e) {
+        }
+        const btn = document.querySelector('.btn.btn-primary');
+        btn.textContent = '¡Copiado!';
+        setTimeout(() => btn.textContent = 'Copiar código', 1200);
+    }
+</script>
+</body>
+</html>
