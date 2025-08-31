@@ -292,6 +292,32 @@
             margin: 0 auto 8px;
         }
 
+        .about-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 2rem;
+        }
+
+        .about-card .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, .16);
+            flex: 0 0 auto;
+        }
+
+        .about-card h3 {
+            margin: 0 0 4px;
+        }
+
+        @media (max-width: 480px) {
+            .about-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
         /* === FAB de ALTO CONTRASTE para saltar a instrucciones === */
         .fab {
             position: fixed;
@@ -514,30 +540,43 @@
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
-    <section class="foot" style="margin-top:3rem">
-        <p>* Oferta y mecánica del programa de invitaciones según Bestcycling a fecha 31/08/2025.</p>
-        <p>Más información</p>
-        <ul>
-            <li>
-                Beneficios / Referidos y Afiliados: <a href="https://bestcycling.com/page/beneficios" target="_blank">bestcycling.com/page/beneficios</a>
-            </li>
-            <li>
-                Planes de suscripción: <a href="https://bestcycling.com/subscription/new?plan=particulares"
-                                          target="_blank">bestcycling.com/subscription/new</a>
-            </li>
-            <li>
-                Dispositivos compatibles: <a href="https://www.bestcycling.com/page/compatibilidad" target="_blank">bestcycling.com/page/compatibilidad</a>
-            </li>
-            <li>
-                Preguntas frecuentes: <a href="https://bestcycling.com/pages/preguntas-frecuentes" target="_blank">bestcycling.com/pages/preguntas-frecuentes</a>
-            </li>
-        </ul>
+    <section class="card about-card">
+        <img src="https://github.com/antoniocambados.png" alt="Tonio — avatar" class="avatar" loading="lazy"/>
+        <div>
+            <h3>Hola, soy Tonio</h3>
+            <p class="foot">
+                Creo esta landing para compartir mi experiencia con Bestcycling y mi <em>código de
+                invitación</em>.
+            <p class="foot">
+                Pásate por mi <a href="https://github.com/antoniocambados" target="_blank" rel="noopener">GitHub (@antoniocambados)</a>, donde quizás esté construyendo alguna otra cosilla.
+            </p>
+        </div>
     </section>
 
     <footer class="foot">
-        <hr style="border-color:rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.12)">
+        <section class="foot">
+            <p>* Oferta y mecánica del programa de invitaciones según Bestcycling a fecha 31/08/2025.</p>
+            <p>Más información</p>
+            <ul>
+                <li>
+                    Beneficios / Referidos y Afiliados: <a href="https://bestcycling.com/page/beneficios" target="_blank">bestcycling.com/page/beneficios</a>
+                </li>
+                <li>
+                    Planes de suscripción: <a href="https://bestcycling.com/subscription/new?plan=particulares"
+                                              target="_blank">bestcycling.com/subscription/new</a>
+                </li>
+                <li>
+                    Dispositivos compatibles: <a href="https://www.bestcycling.com/page/compatibilidad" target="_blank">bestcycling.com/page/compatibilidad</a>
+                </li>
+                <li>
+                    Preguntas frecuentes: <a href="https://bestcycling.com/pages/preguntas-frecuentes" target="_blank">bestcycling.com/pages/preguntas-frecuentes</a>
+                </li>
+            </ul>
+        </section>
+
+
         <p>
-            Esta no es una página oficial ni yo estoy relacionado de ninguna forma con Bestcycling.
+            Esta no es una página oficial. No estoy relacionado de ninguna forma con Bestcycling.
         </p>
     </footer>
 </div>
