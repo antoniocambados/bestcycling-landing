@@ -17,14 +17,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta corporativa (naranja Bestcycling sobre base antracita) */
+            /* Paleta corporativa (naranja Bestcycling sobre base antracita más luminosa) */
             --bg: #1b1f26; /* fondo principal */
             --card: #232834; /* tarjetas ligeramente más claras */
             --muted: #d8e1ee; /* texto secundario */
             --text: #ffffff; /* texto principal */
-            --brand: #ff7a00; /* naranja vivo */
+            --brand: #ff7a00; /* naranja vivo (botones principales) */
             --brand2: #ffb703; /* ámbar de apoyo */
             --ok: #22c55e; /* verde éxito */
+            /* Acento de contraste para FAB y highlight */
+            --fab-accent1: #00eaff; /* cian eléctrico */
+            --fab-accent2: #00ffa8; /* menta brillante */
+            --fab-shadow: #336abfe5; /* azul oscuro */
+            --fab-text: #001318; /* texto oscuro legible sobre el cian */
         }
 
         * {
@@ -165,7 +170,6 @@
             text-decoration: none;
         }
 
-        /* Botones: se mantienen intactos por tu petición */
         .btn-primary {
             background: linear-gradient(135deg, var(--brand), var(--brand2));
             color: #1a0c00;
@@ -239,6 +243,10 @@
             width: clamp(380px, 640px, 66vw);
         }
 
+        #code-section {
+            scroll-margin: 1.5rem;
+        }
+
         @media (max-width: 980px) {
             .hero {
                 grid-template-columns:1fr;
@@ -283,6 +291,94 @@
             display: block;
             margin: 0 auto 8px;
         }
+
+        /* === FAB de ALTO CONTRASTE para saltar a instrucciones === */
+        .fab {
+            position: fixed;
+            right: 20px;
+            bottom: max(20px, env(safe-area-inset-bottom));
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--fab-accent1), var(--fab-accent2));
+            color: var(--fab-text);
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 16px;
+            font-weight: 900;
+            letter-spacing: .2px;
+            box-shadow: 0 0 0 3px rgba(0, 234, 255, .35), /* anillo de contraste */ 0 14px 28px rgba(0, 0, 0, .45);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+            cursor: pointer;
+        }
+
+        .fab.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition-delay: 0s;
+        }
+
+        .fab:focus {
+            outline: 3px solid rgba(0, 234, 255, .7);
+            outline-offset: 2px;
+        }
+
+        .fab .emoji {
+            margin-left: .5ch;
+            text-shadow: 1px 2px 2px var(--fab-shadow);
+        }
+
+        /* Pulso sutil del FAB para destacar */
+        .fab.show::after {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 999px;
+            box-shadow: 0 0 0 0 rgba(0, 234, 255, .55);
+            animation: pulseRing 1.8s ease-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 234, 255, .55);
+            }
+            70% {
+                box-shadow: 0 0 0 14px rgba(0, 234, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 234, 255, 0);
+            }
+        }
+
+        /* Efecto de parpadeo brillante en la card (color cian para contraste) */
+        @keyframes flashShadow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 234, 255, 0);
+            }
+            40% {
+                box-shadow: 0 0 38px 10px rgba(0, 234, 255, .75);
+            }
+        }
+
+        .flash-glow {
+            animation: flashShadow .6s ease-in-out 5;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .flash-glow {
+                animation: none !important;
+            }
+
+            .fab {
+                transition: none;
+            }
+
+            .fab.show::after {
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -307,7 +403,8 @@
 
             <p>
                 Para ayudarte en tu decisión, he decidido crear esta página para compartir contigo
-                mi código de invitación. Con esto <strong class="highlight-text">conseguirás un 20% de descuento</strong>
+                mi código de invitación. Con esto <strong class="highlight-text">conseguirás un 20% de
+                descuento</strong>
                 en tu primera suscripción anual (el equivalente a más de 2 meses) y a mí Bestcycling me
                 premiará a cambio con 1 mes gratis.
             </p>
@@ -319,8 +416,10 @@
             <hr>
 
             <p>
-                Si has llegado aquí sin tener ni idea de qué es Bestcycling, te dejo más información en los recuadros informativos,
-                además de una clase de ejemplo para que puedas tomarle el pulso a lo que te encontrarás si decides unirte.
+                Si has llegado aquí sin tener ni idea de qué es Bestcycling, te dejo más información en los recuadros
+                informativos,
+                además de una clase de ejemplo para que puedas tomarle el pulso a lo que te encontrarás si decides
+                unirte.
             </p>
 
             <h2 style="margin: 2rem 0 1rem 0;">¿Te animas, <em>bestciclista</em>?</h2>
@@ -330,13 +429,16 @@
             </p>
 
             <div class="kpis">
-                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Sin aburrimiento</span><br><strong>Hasta 4</strong><br><span class="foot">clases nuevas por semana</span></div>
-                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Flexibilidad</span><br><strong>20–65'</strong><br><span class="foot">por clase y varios niveles</span></div>
-                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Una pedalada más</span><br><strong>Motivación</strong><br><span class="foot">con instructores y músicas geniales</span></div>
+                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Sin aburrimiento</span><br><strong>Hasta
+                    4</strong><br><span class="foot">clases nuevas por semana</span></div>
+                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Flexibilidad</span><br><strong>20–65'</strong><br><span
+                        class="foot">por clase y varios niveles</span></div>
+                <div class="kpi"><span class="highlight-text" style="display:inline-block;margin-bottom: 0.5rem;">Una pedalada más</span><br><strong>Motivación</strong><br><span
+                        class="foot">con instructores y músicas geniales</span></div>
             </div>
         </div>
 
-        <section class="card">
+        <section id="code-section" class="card">
             <h2 style="margin-top: 0;">Mi código, tu código</h2>
             <p>
                 Con mi código obtienes <b>20% de descuento en tu primera
@@ -359,7 +461,8 @@
                 </div>
                 <div class="feature">
                     <h3>2: Suscríbete desde la web</h3>
-                    <p class="foot">Abre la página de suscripción y pega el código en <em>CÓDIGO DE DESCUENTO</em> antes de
+                    <p class="foot">Abre la página de suscripción y pega el código en <em>CÓDIGO DE DESCUENTO</em> antes
+                        de
                         pagar.
                     </p>
                     <p class="foot">Los códigos solo se canjean en la web.</p>
@@ -386,7 +489,8 @@
             </div>
             <div class="feature">
                 <h3>Más que bici</h3>
-                <p class="foot">Yoga, pilates, HIIT, fuerza, running (cinta y aire libre), elíptica, mindfulness y plan de nutrición.</p>
+                <p class="foot">Yoga, pilates, HIIT, fuerza, running (cinta y aire libre), elíptica, mindfulness y plan
+                    de nutrición.</p>
             </div>
             <div class="feature">
                 <h3>Conecta tus dispositivos</h3>
@@ -404,7 +508,10 @@
 
         <h3>Para muestra, un botón</h3>
 
-        <iframe src="https://www.youtube.com/embed/_fyEyLth664?si=f52K5hOC1U8i7nfT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/_fyEyLth664?si=f52K5hOC1U8i7nfT" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
 
     <section class="foot" style="margin-top:3rem">
@@ -412,9 +519,11 @@
         <p>Más información</p>
         <ul>
             <li>
-                Beneficios / Referidos y Afiliados: <a href="https://bestcycling.com/page/beneficios" target="_blank">bestcycling.com/page/beneficios</a></li>
+                Beneficios / Referidos y Afiliados: <a href="https://bestcycling.com/page/beneficios" target="_blank">bestcycling.com/page/beneficios</a>
+            </li>
             <li>
-                Planes de suscripción: <a href="https://bestcycling.com/subscription/new?plan=particulares" target="_blank">bestcycling.com/subscription/new</a>
+                Planes de suscripción: <a href="https://bestcycling.com/subscription/new?plan=particulares"
+                                          target="_blank">bestcycling.com/subscription/new</a>
             </li>
             <li>
                 Dispositivos compatibles: <a href="https://www.bestcycling.com/page/compatibilidad" target="_blank">bestcycling.com/page/compatibilidad</a>
@@ -427,9 +536,17 @@
 
     <footer class="foot">
         <hr style="border-color:rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.12)">
-        <p>Hecho con ❤️ para la comunidad Bestcycling. Esta no es una página oficial ni yo estoy relacionado de ninguna forma con Bestcycling.</p>
+        <p>
+            Esta no es una página oficial ni yo estoy relacionado de ninguna forma con Bestcycling.
+        </p>
     </footer>
 </div>
+
+<!-- Botón flotante de alto contraste para ir a la sección de instrucciones -->
+<button id="fab-goto-code" class="fab" aria-controls="code-section" aria-label="Ir a instrucciones">
+    <span class="emoji" aria-hidden="true">👇</span>
+    Ver código y descuento
+</button>
 
 <script>
     function copyCode() {
@@ -444,6 +561,103 @@
         btn.textContent = '¡Copiado!';
         setTimeout(() => btn.textContent = 'Copiar código', 1200);
     }
+
+    // Lógica del FAB + scroll suave + parpadeo + flecha direccional
+    (function () {
+        const codeSection = document.getElementById('code-section');
+        const fab = document.getElementById('fab-goto-code');
+        const emojiEl = fab.querySelector('.emoji');
+        if (!codeSection || !fab || !emojiEl) return;
+
+        const supportsIO = 'IntersectionObserver' in window;
+
+        function setFabVisible(show) {
+            if (show) {
+                fab.classList.add('show');
+            } else {
+                fab.classList.remove('show');
+            }
+        }
+
+        // Decide hacia dónde apunta el emoji según la posición relativa de la sección
+        let ticking = false;
+
+        function updateFabDirection() {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const rect = codeSection.getBoundingClientRect();
+                const margin = 24; // margen para evitar valores límite
+                let dir = 'down';
+                if (rect.bottom + margin < 0) {
+                    dir = 'up'; // completamente por encima
+                } else if (rect.top - margin > window.innerHeight) {
+                    dir = 'down'; // completamente por debajo
+                } else {
+                    // Parte fuera de vista: si la parte superior está por encima, apunta arriba; si no, abajo
+                    dir = rect.top < 0 ? 'up' : 'down';
+                }
+                emojiEl.textContent = dir === 'up' ? '👆' : '👇';
+                fab.setAttribute('aria-label', dir === 'up' ? 'Ir arriba a instrucciones' : 'Ir abajo a instrucciones');
+                ticking = false;
+            });
+        }
+
+        // Mostrar el FAB solo cuando la card no está (suficientemente) visible
+        if (supportsIO) {
+            const visObs = new IntersectionObserver((entries) => {
+                const entry = entries[0];
+                const visible = entry.isIntersecting && entry.intersectionRatio > 0.35;
+                setFabVisible(!visible);
+                if (!visible) updateFabDirection();
+            }, {threshold: [0, 0.35, 0.6]});
+            visObs.observe(codeSection);
+        } else {
+            // Fallback sin IntersectionObserver
+            setFabVisible(true);
+            updateFabDirection();
+        }
+
+        // Actualiza dirección al hacer scroll o resize
+        window.addEventListener('scroll', updateFabDirection, {passive: true});
+        window.addEventListener('resize', updateFabDirection);
+
+        // Scroll suave a la sección y resaltar al llegar
+        function triggerFlash() {
+            if (!codeSection) return;
+            // Respeta accesibilidad
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduce) return; // no parpadeo para usuarios con reduce motion
+            codeSection.classList.add('flash-glow');
+            codeSection.addEventListener('animationend', function handler() {
+                codeSection.classList.remove('flash-glow');
+                codeSection.removeEventListener('animationend', handler);
+            }, {once: true});
+        }
+
+        fab.addEventListener('click', function (e) {
+            e.preventDefault();
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            try {
+                codeSection.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start', inline: 'nearest'});
+            } catch (err) {
+                location.hash = '#code-section';
+            }
+
+            if ('IntersectionObserver' in window) {
+                const once = new IntersectionObserver((entries) => {
+                    const ent = entries[0];
+                    if (ent.isIntersecting && ent.intersectionRatio >= 0.6) {
+                        triggerFlash();
+                        once.disconnect();
+                    }
+                }, {threshold: [0.6]});
+                once.observe(codeSection);
+            } else {
+                setTimeout(triggerFlash, 600);
+            }
+        });
+    })();
 </script>
 </body>
 </html>
