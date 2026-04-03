@@ -24,28 +24,47 @@
     <meta name="twitter:image" content="https://bestcycling.tonio.dev/logo.png"/>
     <style>
         :root {
-            /* Paleta corporativa (naranja Bestcycling sobre base antracita más luminosa) */
-            --bg: #1b1f26; /* fondo principal */
-            --card: #232834; /* tarjetas ligeramente más claras */
-            --muted: #d8e1ee; /* texto secundario */
-            --text: #ffffff; /* texto principal */
-            --brand: #ff7a00; /* naranja vivo (botones principales) */
-            --brand2: #ffb703; /* ámbar de apoyo */
-            --ok: #22c55e; /* verde éxito */
-            /* Acento de contraste para FAB y highlight */
-            --fab-accent1: #00eaff; /* cian eléctrico */
-            --fab-accent2: #00ffa8; /* menta brillante */
-            --fab-shadow: #336abfe5; /* azul oscuro */
-            --fab-text: #001318; /* texto oscuro legible sobre el cian */
+            --bg: #101216;
+            --bg-soft: #171b21;
+            --card: #1f252d;
+            --card-strong: #262e38;
+            --card-cool: #202735;
+            --card-cool-2: #18202c;
+            --line: rgba(255, 255, 255, .09);
+            --line-strong: rgba(255, 255, 255, .16);
+            --muted: #b7c0ce;
+            --text: #f6f7fb;
+            --brand: #ff7a00;
+            --brand2: #ffb703;
+            --brand3: #ffd166;
+            --accent-sky: #4cc9f0;
+            --brand-soft: rgba(255, 122, 0, .14);
+            --brand-line: rgba(255, 122, 0, .28);
+            --cool-line: rgba(76, 201, 240, .24);
+            --ok: #22c55e;
+            --shadow: 0 24px 60px rgba(0, 0, 0, .34);
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --fab-accent1: #00eaff;
+            --fab-accent2: #00ffa8;
+            --fab-shadow: #336abfe5;
+            --fab-text: #001318;
         }
 
         * {
             box-sizing: border-box
         }
 
-        html, body {
+        html {
             margin: 0;
-            height: 100%;
+            min-height: 100%;
+            background: #101216;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
             font-family: "Segoe UI Variable Text","Segoe UI Variable Display","Segoe UI", ui-sans-serif, system-ui, -apple-system, Roboto, "Helvetica Neue", Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
             -webkit-font-smoothing: antialiased; /* macOS/WebKit */
             -moz-osx-font-smoothing: grayscale;  /* macOS/Firefox */
@@ -55,11 +74,25 @@
             -webkit-text-size-adjust: 100%;
             text-size-adjust: 100%;
             color: var(--text);
-            background: radial-gradient(1200px 800px at 10% -10%, rgba(255, 122, 0, .22) 0%, rgba(255, 122, 0, 0) 60%),
-            radial-gradient(900px 700px at 100% -10%, rgba(255, 183, 3, .18) 0%, rgba(255, 183, 3, 0) 60%),
-            linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, 0) 40%),
-            var(--bg);
+            background:
+                radial-gradient(1100px 700px at -10% -15%, rgba(255, 122, 0, .26) 0%, rgba(255, 122, 0, 0) 55%),
+                radial-gradient(900px 580px at 110% 0%, rgba(255, 183, 3, .18) 0%, rgba(255, 183, 3, 0) 50%),
+                linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, 0) 20%),
+                linear-gradient(180deg, #0f1216 0%, #141920 100%);
             background-repeat: no-repeat !important;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, .55), transparent 82%);
+            opacity: .35;
         }
 
         a {
@@ -71,87 +104,171 @@
         }
 
         .wrap {
-            max-width: 1100px;
+            max-width: 1240px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 28px 24px 56px;
         }
 
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 20px;
+            margin-bottom: 22px;
+            padding: 14px 18px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(14, 17, 22, .72);
+            backdrop-filter: blur(18px);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(76, 201, 240, 0), rgba(76, 201, 240, .5), rgba(130, 150, 255, .35), rgba(76, 201, 240, 0));
         }
 
         .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
         }
 
         .badge {
             display: inline-flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
             background: linear-gradient(135deg, var(--brand), var(--brand2));
-            color: #1a0c00;
-            padding: 6px 10px;
+            color: #1d1003;
+            border: 1px solid rgba(255, 214, 153, .42);
+            padding: 10px 16px;
             border-radius: 999px;
             font-weight: 700;
-            font-size: .85rem;
+            font-size: .84rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            box-shadow: 0 14px 30px rgba(255, 122, 0, .22), inset 0 0 0 1px rgba(255, 255, 255, .14);
         }
 
         .hero {
-            display: grid;
-            grid-template-columns:1.1fr .9fr;
-            gap: 28px;
-            align-items: self-end;
-            padding: 2rem 0;
+            grid-area: hero;
+            margin-bottom: 28px;
+        }
+
+        .hero-copy {
+            position: relative;
+            padding: 32px;
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02) 45%, rgba(76, 201, 240, .05) 100%),
+                rgba(20, 24, 30, .82);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero-copy::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(520px 300px at 95% 0%, rgba(83, 117, 255, .18), transparent 70%),
+                radial-gradient(280px 180px at 12% 100%, rgba(76, 201, 240, .10), transparent 70%),
+                linear-gradient(135deg, rgba(255, 255, 255, .04), transparent 45%);
+            pointer-events: none;
+        }
+
+        .hero-copy > * {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 4.2vw, 3.2rem);
-            line-height: 1.05;
-            margin: 1.5rem 0 0.5rem;
+            font-size: clamp(2.9rem, 7vw, 5.4rem);
+            line-height: .94;
+            margin: 18px 0 18px;
+            letter-spacing: -.04em;
+            text-wrap: balance;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            text-shadow: 0 0 24px var(--brand);
         }
 
         .hero p {
             color: var(--muted);
             font-size: 1.05rem;
+            line-height: 1.72;
         }
 
         .hero .foot {
-            font-size: 0.8rem;
+            font-size: .9rem;
         }
 
         .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .00));
-            border: 1px solid rgba(255, 255, 255, .16);
-            border-radius: 18px;
-            padding: 18px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .015));
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(76, 201, 240, 0), rgba(76, 201, 240, .45), rgba(130, 150, 255, .35), rgba(76, 201, 240, 0));
+            opacity: .9;
+            pointer-events: none;
         }
 
         .kpis {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
-            margin-top: 18px;
+            gap: 16px;
+            margin-top: 28px;
         }
 
         .kpi {
-            background: var(--card);
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 14px;
-            padding: 14px;
-            text-align: center;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015)),
+                var(--card);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 18px 16px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
         }
 
         .kpi strong {
-            font-size: 1.4rem;
+            font-size: 2rem;
+            line-height: 1;
         }
 
         .cta {
             display: flex;
-            gap: 10px;
-            margin-top: 14px;
+            gap: 12px;
+            margin-top: 18px;
             flex-wrap: wrap;
         }
 
@@ -162,36 +279,55 @@
         .code {
             flex: 1;
             min-width: 220px;
-            background: #262c39;
-            border: 1px dashed rgba(255, 122, 0, .35);
-            border-radius: 12px;
-            padding: 14px 16px;
-            font-size: 1.05rem;
+            background: rgba(10, 13, 18, .92);
+            border: 1px solid rgba(255, 122, 0, .32);
+            border-radius: 16px;
+            padding: 16px 18px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
             color: var(--text);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .03);
         }
 
         .btn {
             display: inline-block;
             appearance: none;
             border: 0;
-            border-radius: 12px;
-            padding: 14px 18px;
+            border-radius: 16px;
+            padding: 14px 20px;
             font-weight: 700;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: .98rem;
             text-transform: uppercase;
             text-decoration: none;
+            letter-spacing: .08em;
+            transition: background-color .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease, color .18s ease;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--brand), var(--brand2));
             color: #1a0c00;
+            box-shadow: 0 18px 34px rgba(255, 122, 0, .24), inset 0 0 0 1px rgba(255, 255, 255, .08);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff8a18, #ffc21a);
+            color: #1a0c00;
+            box-shadow: 0 18px 34px rgba(255, 122, 0, .3), inset 0 0 0 1px rgba(255, 255, 255, .14);
         }
 
         .btn-ghost {
-            background: transparent;
-            color: var(--brand);
-            border: 1px solid rgba(255, 122, 0, .35);
+            background: rgba(255, 255, 255, .02);
+            color: #ffdcb7;
+            border: 1px solid var(--brand-line);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, .06);
+            border-color: rgba(255, 183, 3, .32);
+            color: #ffe6cb;
         }
 
         .grid {
@@ -201,21 +337,28 @@
         }
 
         .feature {
-            background: var(--card);
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 16px;
-            padding: 18px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, .01)),
+                linear-gradient(180deg, rgba(76, 201, 240, .03), rgba(76, 201, 240, 0)),
+                var(--card-cool);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px 18px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .18s ease, box-shadow .18s ease;
         }
 
         .feature h3 {
-            margin: 0 0 6px;
+            margin: 0 0 10px;
+            font-size: 1.05rem;
         }
 
         .how {
             display: grid;
             grid-template-columns: 1fr;
             gap: 16px;
-            margin: 22px 0;
+            margin: 24px 0 28px;
         }
 
         .quote {
@@ -229,71 +372,283 @@
         .foot {
             font-size: .9rem;
             color: var(--muted);
+            line-height: 1.7;
         }
 
         .faq-card {
-            margin-top: 2rem;
+            margin-top: 0;
         }
 
         .faq-list {
             display: grid;
-            gap: 14px;
-            margin-top: 18px;
+            gap: 16px;
+            margin-top: 22px;
         }
 
         .faq-item {
-            background: var(--card);
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 16px;
-            padding: 18px;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, .01)),
+                linear-gradient(180deg, rgba(83, 117, 255, .03), rgba(83, 117, 255, 0)),
+                var(--card-cool-2);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .faq-item h3 {
-            margin: 0 0 8px;
+            margin: 0 0 10px;
+            font-size: 1.05rem;
         }
 
         footer {
-            margin: 40px 0 60px 0;
+            margin: 28px 0 0;
+            padding: 26px 28px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            background: rgba(13, 16, 21, .8);
+            box-shadow: var(--shadow);
         }
 
         .pill {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 122, 0, .16);
-            border: 1px solid rgba(255, 122, 0, .34);
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid var(--line);
             border-radius: 999px;
-            padding: 6px 12px;
-            color: #ffe7cc;
-            font-size: .8rem;
+            padding: 8px 14px;
+            color: #d7dee8;
+            font-size: .78rem;
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: .08em;
         }
 
         #code-section {
+            grid-area: aside;
             scroll-margin: 1.5rem;
+            position: sticky;
+            top: 28px;
+            align-self: start;
+            background:
+                radial-gradient(340px 220px at 0% 0%, rgba(255, 255, 255, .18), transparent 62%),
+                linear-gradient(145deg, #ffb703 0%, #ff9719 42%, #ff7a00 100%);
+            border-color: rgba(255, 183, 3, .52);
+            box-shadow: 0 28px 54px rgba(0, 0, 0, .34), 0 18px 38px rgba(255, 122, 0, .28);
+            color: #221203;
+        }
+
+        #code-section::before {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 250, 236, .92), rgba(255, 232, 195, .7), rgba(255, 255, 255, 0));
+        }
+
+        #code-section p,
+        #code-section .foot,
+        #code-section h2,
+        #code-section h3 {
+            color: #2b1702;
+        }
+
+        #code-section .cta {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #code-section .code-wrap {
+            display: grid;
+            gap: 8px;
+        }
+
+        #code-section .cta-label {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(50, 23, 4, .12);
+            border: 1px solid rgba(78, 34, 0, .12);
+            color: rgba(43, 23, 2, .86);
+            font-size: .74rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        #code-section .code {
+            background: rgba(24, 16, 8, .88);
+            border-color: rgba(255, 248, 235, .34);
+            color: #fff7ef;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 10px 20px rgba(86, 37, 0, .18);
+        }
+
+        #code-section .btn {
+            display: inline-flex;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+        }
+
+        #code-section .feature {
+            background: rgba(255, 250, 242, .16);
+            border-color: rgba(100, 47, 1, .12);
+            box-shadow: none;
+            padding: 14px 14px 14px 16px;
+            border-radius: 14px;
+        }
+
+        #code-section .feature h3 {
+            margin-bottom: 6px;
+            font-size: .95rem;
+        }
+
+        #code-section .btn-primary {
+            background: #23140a;
+            color: #fff4ea;
+            box-shadow: 0 16px 26px rgba(74, 31, 0, .2);
+        }
+
+        #code-section .btn-primary:hover {
+            background: #140c06;
+            color: #fff4ea;
+            box-shadow: 0 16px 26px rgba(74, 31, 0, .24), inset 0 0 0 1px rgba(255, 255, 255, .06);
+        }
+
+        #code-section .btn-ghost {
+            background: rgba(255, 250, 242, .22);
+            border-color: rgba(90, 38, 0, .18);
+            color: #2b1702;
+        }
+
+        #code-section .btn-ghost:hover {
+            background: rgba(255, 250, 242, .34);
+            border-color: rgba(90, 38, 0, .28);
+            color: #2b1702;
+        }
+
+        #code-section h2:first-of-type {
+            font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+            margin-bottom: 14px;
+        }
+
+        #code-section h2 + .how,
+        #code-section .how {
+            gap: 10px;
+            margin: 16px 0 20px;
+        }
+
+        .overview {
+            grid-area: overview;
+            padding: 28px;
+        }
+
+        .page-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1.18fr) minmax(320px, 380px);
+            grid-template-areas:
+                "hero aside"
+                "overview aside"
+                "lower aside";
+            gap: 28px;
+            align-items: start;
+        }
+
+        .lower-stack {
+            grid-area: lower;
+            display: grid;
+            gap: 24px;
+        }
+
+        .media-card {
+            display: grid;
+            gap: 16px;
+            padding: 22px;
+            border-radius: 22px;
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(260px 160px at 100% 0%, rgba(76, 201, 240, .08), transparent 70%),
+                linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .015)),
+                rgba(15, 20, 28, .92);
+        }
+
+        .media-card h3 {
+            margin: 0;
+            font-size: 1.1rem;
         }
 
         @media (max-width: 980px) {
+            .wrap {
+                padding: 18px 16px 42px;
+            }
+
+            header {
+                border-radius: 28px;
+            }
+
             .hero {
-                grid-template-columns:1fr;
+                margin-bottom: 0;
+            }
+
+            .hero-copy {
+                padding: 26px;
+            }
+
+            .page-shell {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "hero"
+                    "aside"
+                    "overview"
+                    "lower";
+            }
+
+            #code-section {
+                position: static;
+                top: auto;
             }
 
             .grid {
                 grid-template-columns:1fr 1fr;
             }
-
-            .how {
-                grid-template-columns:1fr;
-            }
         }
 
         @media (max-width: 640px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 24px;
+            }
+
+            .hero-copy,
+            .card,
+            .overview,
+            footer {
+                padding: 20px;
+            }
+
+            .hero h1 {
+                max-width: none;
+                font-size: clamp(2.4rem, 14vw, 4rem);
+            }
+
             .grid {
                 grid-template-columns:1fr;
             }
 
             .kpis {
                 grid-template-columns:1fr;
+            }
+
+            .cta {
+                flex-direction: column;
+            }
+
+            .btn,
+            .code {
+                width: 100%;
             }
         }
 
@@ -316,19 +671,26 @@
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-top: 2rem;
+            margin-top: 0;
+            min-height: 100%;
+            background:
+                radial-gradient(220px 120px at 100% 0%, rgba(76, 201, 240, .07), transparent 70%),
+                linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .015)),
+                rgba(18, 23, 32, .88);
         }
 
         .about-card .avatar {
-            width: 72px;
-            height: 72px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, .16);
+            border: 2px solid rgba(130, 150, 255, .34);
             flex: 0 0 auto;
+            box-shadow: 0 0 0 8px rgba(76, 201, 240, .06), 0 14px 26px rgba(0, 0, 0, .16);
         }
 
         .about-card h3 {
-            margin: 0 0 4px;
+            margin: 0 0 8px;
+            font-size: 1.35rem;
         }
 
         @media (max-width: 480px) {
@@ -397,25 +759,7 @@
             }
         }
 
-        /* Efecto de parpadeo brillante en la card (color cian para contraste) */
-        @keyframes flashShadow {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(0, 234, 255, 0);
-            }
-            40% {
-                box-shadow: 0 0 38px 10px rgba(0, 234, 255, .75);
-            }
-        }
-
-        .flash-glow {
-            animation: flashShadow .6s ease-in-out 5;
-        }
-
         @media (prefers-reduced-motion: reduce) {
-            .flash-glow {
-                animation: none !important;
-            }
-
             .fab {
                 transition: none;
             }
@@ -429,13 +773,15 @@
         .yt-lite {
             position: relative;
             display: block;
-            width: clamp(380px, 640px, 66vw);
+            width: 100%;
+            max-width: 100%;
             aspect-ratio: 16 / 9;
             margin: 0 auto;
             border-radius: 0.5rem;
             overflow: hidden;
             cursor: pointer;
             background: #000;
+            box-shadow: 0 24px 42px rgba(0, 0, 0, .3);
         }
 
         @media (max-width: 480px) {
@@ -462,10 +808,6 @@
             display: grid;
             place-items: center;
             box-shadow: 0 10px 24px rgba(0, 0, 0, .4);
-        }
-
-        .yt-lite:hover .lty-playbtn {
-            background: rgba(0, 0, 0, .75);
         }
 
         .yt-lite .lty-playbtn::before {
@@ -500,8 +842,9 @@
         <div class="pill">Cycling · Nutrición · Elíptica · Tonificación · Running</div>
     </header>
 
+    <div class="page-shell">
     <section class="hero">
-        <div>
+        <div class="hero-copy">
             <span class="badge">-20% en tu primera suscripción anual</span>
             <h1 itemprop="headline">Practica <em>ciclo indoor</em> a tu aire</h1>
 
@@ -547,45 +890,48 @@
             </div>
         </div>
 
-        <section id="code-section" class="card">
-            <h2 style="margin-top: 0;">Mi código, tu código</h2>
-            <p>
-                Con mi código obtienes <b>20% de descuento en tu primera
-                suscripción anual</b> y yo gano puntos y <b>1 mes gratis</b> por cada alta.
-                ¡Gracias por apoyarme! *
-            </p>
-            <div class="cta">
-                <input id="code" class="code" aria-label="Código de invitación" value="DKMyUc"/>
-                <button class="btn btn-primary" onclick="copyCode()">Copiar código</button>
-                <a class="btn btn-ghost"
-                   href="https://links.bestcycling.com/DKMyUc" target="_blank"
-                   rel="noopener">Canjear en Bestcycling</a>
-            </div>
-
-            <h2>Cómo usar el código</h2>
-            <div class="how">
-                <div class="feature">
-                    <h3>1: Copia el código</h3>
-                    <p class="foot">Pulsa “Copiar código” y llévalo en el portapapeles.</p>
-                </div>
-                <div class="feature">
-                    <h3>2: Suscríbete desde la web</h3>
-                    <p class="foot">Abre la página de suscripción y pega el código en <em>CÓDIGO DE DESCUENTO</em> antes
-                        de
-                        pagar.
-                    </p>
-                    <p class="foot">Los códigos solo se canjean en la web.</p>
-                </div>
-            </div>
-            <a class="btn btn-primary" href="https://links.bestcycling.com/DKMyUc"
-               target="_blank" rel="noopener">Ir a la suscripción</a>
-        </section>
     </section>
 
-    <div class="card" itemprop="mainContentOfPage">
+    <section id="code-section" class="card">
+        <h2 style="margin-top: 0;">Mi código, tu código</h2>
+        <p>
+            Con mi código obtienes <b>20% de descuento en tu primera
+            suscripción anual</b> y yo gano puntos y <b>1 mes gratis</b> por cada alta.
+            ¡Gracias por apoyarme! *
+        </p>
+        <div class="cta">
+            <label class="code-wrap" for="code">
+                <span class="cta-label">Tu código de invitación</span>
+                <input id="code" class="code" aria-label="Código de invitación" value="DKMyUc"/>
+            </label>
+            <button id="copy-button" class="btn btn-primary" onclick="copyCode()">Copiar código</button>
+            <a class="btn btn-ghost"
+               href="https://links.bestcycling.com/DKMyUc" target="_blank"
+               rel="noopener">Canjear en Bestcycling</a>
+        </div>
+
+        <h2>Cómo usar el código</h2>
+        <div class="how">
+            <div class="feature">
+                <h3>1 &mdash; Copia el código</h3>
+                <p class="foot">Pulsa “Copiar código” y llévalo en el portapapeles.</p>
+            </div>
+            <div class="feature">
+                <h3>2 &mdash; Suscríbete desde la web</h3>
+                <p class="foot">Abre la página de suscripción y pega el código en <em>CÓDIGO DE DESCUENTO</em> antes
+                    de
+                    pagar.
+                </p>
+                <p class="foot">Los códigos solo se canjean en la web.</p>
+            </div>
+        </div>
+        <a class="btn btn-primary" href="https://links.bestcycling.com/DKMyUc"
+           target="_blank" rel="noopener">Ir a la suscripción</a>
+    </section>
+
+    <section class="card overview" itemprop="mainContentOfPage">
         <img class="brand-wordmark" src="/logo.png" width="280" height="80" loading="lazy" decoding="async" alt="Bestcycling (logotipo oficial)" itemprop="primaryImageOfPage">
         <h3 style="margin:0 0 8px">¿Por qué Bestcycling?</h3>
-
         <div class="grid">
             <div class="feature">
                 <h3>Catálogo enorme</h3>
@@ -614,33 +960,25 @@
             </div>
         </div>
 
-        <h3>Para muestra, un botón</h3>
-
-        <!-- Lite YouTube embed: sin <iframe> hasta interacción -->
-        <div class="yt-lite" data-ytid="_fyEyLth664" role="button" tabindex="0" aria-label="Reproducir vídeo: Clase/explicación Bestcycling (demo)">
-            <span class="lty-playbtn" aria-hidden="true"></span>
-            <noscript>
-                <a href="https://www.youtube.com/watch?v=_fyEyLth664" target="_blank" rel="noopener">Ver el vídeo en YouTube</a>
-            </noscript>
-        </div>
-    </div>
-
-    <section class="card about-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
-        <img src="https://github.com/antoniocambados.png" alt="Tonio — avatar" class="avatar" loading="lazy" itemprop="image"/>
-        <div>
-            <h3>Hola, soy <span itemprop="name">Tonio</span></h3>
+        <aside class="media-card" style="margin-top:22px;">
+            <h3>Para muestra, un botón</h3>
             <p class="foot">
-                Creo esta landing para compartir mi experiencia con Bestcycling y mi <em>código de
-                invitación</em>.
+                Si prefieres hacerte una idea rápida antes de suscribirte, aquí tienes una clase de ejemplo para ver
+                el tono, la energía y el tipo de sesión que te vas a encontrar.
             </p>
-            <p class="foot">
-                Pásate por mi <a href="https://github.com/antoniocambados" target="_blank" rel="noopener" itemprop="sameAs">GitHub
-                (@antoniocambados)</a>, donde quizás esté construyendo alguna otra cosilla.
-            </p>
-        </div>
+
+            <!-- Lite YouTube embed: sin <iframe> hasta interacción -->
+            <div class="yt-lite" data-ytid="_fyEyLth664" role="button" tabindex="0" aria-label="Reproducir vídeo: Clase/explicación Bestcycling (demo)">
+                <span class="lty-playbtn" aria-hidden="true"></span>
+                <noscript>
+                    <a href="https://www.youtube.com/watch?v=_fyEyLth664" target="_blank" rel="noopener">Ver el vídeo en YouTube</a>
+                </noscript>
+            </div>
+        </aside>
     </section>
 
-    <section class="card faq-card" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="lower-stack">
+        <section class="card faq-card" itemscope itemtype="https://schema.org/FAQPage">
         <h2 style="margin-top:0;">Preguntas frecuentes sobre Bestcycling y el descuento</h2>
         <p class="foot">
             Esta sección existe para resolver las dudas más habituales antes de suscribirte. La idea es que la página
@@ -737,7 +1075,24 @@
                 </div>
             </article>
         </div>
-    </section>
+        </section>
+
+        <section class="card about-card" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <img src="https://github.com/antoniocambados.png" alt="Tonio — avatar" class="avatar" loading="lazy" itemprop="image"/>
+            <div>
+                <h3>Hola, soy <span itemprop="name">Tonio</span></h3>
+                <p class="foot">
+                    Creo esta página para compartir mi experiencia con Bestcycling y mi <em>código de
+                    invitación</em>.
+                </p>
+                <p class="foot">
+                    Pásate por mi <a href="https://github.com/antoniocambados" target="_blank" rel="noopener" itemprop="sameAs">GitHub
+                    (@antoniocambados)</a>, donde quizás esté construyendo alguna otra cosilla.
+                </p>
+            </div>
+        </section>
+    </div>
+    </div>
 
     <footer class="foot">
         <section class="foot">
@@ -775,17 +1130,17 @@
 </button>
 
 <script>
-    // Lógica para el botón de copiar
     function copyCode() {
         const el = document.getElementById('code');
+        const btn = document.getElementById('copy-button');
+        if (!el || !btn) return;
         el.select();
         el.setSelectionRange(0, 99999);
         try {
             document.execCommand('copy');
         } catch (e) {
         }
-        const btn = document.querySelector('.btn.btn-primary');
-        btn.textContent = '¡Copiado!';
+        btn.textContent = 'Copiado';
         setTimeout(() => btn.textContent = 'Copiar código', 1200);
     }
 
@@ -849,39 +1204,15 @@
         window.addEventListener('scroll', updateFabDirection, {passive: true});
         window.addEventListener('resize', updateFabDirection);
 
-        // Scroll suave a la sección y resaltar al llegar
-        function triggerFlash() {
-            if (!codeSection) return;
-            // Respeta accesibilidad
-            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduce) return; // no parpadeo para usuarios con reduce motion
-            codeSection.classList.add('flash-glow');
-            codeSection.addEventListener('animationend', function handler() {
-                codeSection.classList.remove('flash-glow');
-                codeSection.removeEventListener('animationend', handler);
-            }, {once: true});
-        }
-
+        // Scroll suave a la sección del código
         fab.addEventListener('click', function (e) {
             e.preventDefault();
+
             const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             try {
                 codeSection.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start', inline: 'nearest'});
             } catch (err) {
                 location.hash = '#code-section';
-            }
-
-            if ('IntersectionObserver' in window) {
-                const once = new IntersectionObserver((entries) => {
-                    const ent = entries[0];
-                    if (ent.isIntersecting && ent.intersectionRatio >= 0.6) {
-                        triggerFlash();
-                        once.disconnect();
-                    }
-                }, {threshold: [0.6]});
-                once.observe(codeSection);
-            } else {
-                setTimeout(triggerFlash, 600);
             }
         });
     })();
