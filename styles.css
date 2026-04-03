@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     color-scheme: dark;
     --bg: #101216;
@@ -86,9 +90,9 @@
     --promo-label-bg: rgba(50, 23, 4, .12);
     --promo-label-border: rgba(78, 34, 0, .12);
     --promo-label-text: rgba(43, 23, 2, .86);
-    --promo-code-bg: rgba(24, 16, 8, .88);
+    --promo-code-bg: rgba(255, 255, 255, .88);
     --promo-code-border: rgba(255, 248, 235, .34);
-    --promo-code-text: #fff7ef;
+    --promo-code-text: #221203;
     --promo-code-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05), 0 10px 20px rgba(86, 37, 0, .18);
     --promo-feature-bg: rgba(255, 250, 242, .16);
     --promo-feature-border: rgba(100, 47, 1, .12);
@@ -458,6 +462,10 @@ header::after {
     color: var(--brand);
 }
 
+.underlined {
+    text-decoration: underline;
+}
+
 .code {
     flex: 1;
     min-width: 220px;
@@ -486,6 +494,19 @@ header::after {
     text-decoration: none;
     letter-spacing: .08em;
     transition: background-color .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.btn-with-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+    flex: 0 0 auto;
 }
 
 .btn-primary {
@@ -757,6 +778,15 @@ footer {
 #code-section h2,
 #code-section h3 {
     color: var(--promo-copy);
+}
+
+#code-section a:not(.btn) {
+    color: #8a3200;
+    text-decoration: underline;
+}
+
+#code-section a:not(.btn):hover {
+    color: #5f2200;
 }
 
 #code-section .cta {
@@ -1093,6 +1123,10 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     .fab {
         transition: none;
     }
