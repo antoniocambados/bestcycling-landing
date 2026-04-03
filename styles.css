@@ -378,7 +378,7 @@ header::after {
     text-wrap: balance;
 }
 
-.hero h1 em {
+.hero .shadow-text {
     font-style: normal;
     text-shadow: 0 0 24px var(--brand);
 }
@@ -387,6 +387,13 @@ header::after {
     color: var(--muted);
     font-size: 1.05rem;
     line-height: 1.72;
+}
+
+.hero p.hero-subtitle {
+    color: unset;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 0.94;
 }
 
 .hero .foot {
