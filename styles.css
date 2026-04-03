@@ -600,6 +600,55 @@ header::after {
     font-size: 1.05rem;
 }
 
+.lead {
+    margin: 0 0 18px;
+    color: var(--text);
+    font-size: 1.05rem;
+    line-height: 1.78;
+}
+
+.split-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.bullet-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--muted);
+    line-height: 1.75;
+}
+
+.bullet-list li + li {
+    margin-top: 8px;
+}
+
+.ordered-list {
+    display: grid;
+    gap: 10px;
+}
+
+.content-card {
+    display: grid;
+    gap: 18px;
+}
+
+.content-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.78;
+}
+
+.content-card strong,
+.bullet-list strong {
+    color: var(--text);
+}
+
+.feature .bullet-list {
+    margin-top: 10px;
+}
+
 footer {
     margin: 28px 0 0;
     padding: 26px 28px;
@@ -939,6 +988,10 @@ footer {
             "aside"
             "overview"
             "lower";
+    }
+
+    .split-grid {
+        grid-template-columns: 1fr;
     }
 
     #code-section {
