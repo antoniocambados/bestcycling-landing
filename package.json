@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "build:js": "esbuild app.js --minify --outfile=app.min.js",
+    "build:css": "esbuild styles.css --minify --outfile=styles.min.css",
+    "build": "npm.cmd run build:js && npm.cmd run build:css",
+    "watch:js": "esbuild app.js --minify --outfile=app.min.js --watch",
+    "watch:css": "esbuild styles.css --minify --outfile=styles.min.css --watch",
+    "watch": "concurrently \"npm.cmd run watch:js\" \"npm.cmd run watch:css\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.28.0"
+  }
+}
