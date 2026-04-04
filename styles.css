@@ -76,7 +76,6 @@ html {
         linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, .01)),
         linear-gradient(180deg, rgba(83, 117, 255, .03), rgba(83, 117, 255, 0)),
         var(--card-cool-2);
-    --footer-bg: rgba(13, 16, 21, .8);
     --pill-bg: rgba(255, 255, 255, .03);
     --pill-text: #d7dee8;
     --promo-bg:
@@ -189,7 +188,6 @@ html {
         linear-gradient(180deg, rgba(255, 255, 255, .82), rgba(255, 255, 255, .62)),
         linear-gradient(180deg, rgba(255, 122, 0, .04), rgba(255, 122, 0, 0)),
         var(--card-cool-2);
-    --footer-bg: rgba(255, 250, 244, .82);
     --pill-bg: rgba(255, 255, 255, .56);
     --pill-text: #4e5968;
     --promo-bg:
@@ -271,6 +269,11 @@ body::before {
 
 a {
     color: var(--brand);
+}
+
+p, ul {
+    text-align: justify;
+    hyphens: auto;
 }
 
 p:last-child {
@@ -455,8 +458,9 @@ header::after {
 .cta {
     display: flex;
     gap: 12px;
-    margin-top: 18px;
+    margin: 1.5rem auto;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .highlight-text {
@@ -647,15 +651,6 @@ header::after {
 
 .feature .bullet-list {
     margin-top: 10px;
-}
-
-footer {
-    margin: 28px 0 0;
-    padding: 26px 28px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    background: var(--footer-bg);
-    box-shadow: var(--shadow);
 }
 
 .pill {
@@ -928,8 +923,13 @@ footer {
     margin: 16px 0 20px;
 }
 
-.overview {
+.overview-stack {
     grid-area: overview;
+    display: grid;
+    gap: 24px;
+}
+
+.overview {
     padding: 28px;
 }
 
@@ -959,9 +959,15 @@ footer {
     background: var(--media-card-bg);
 }
 
+.media-card h2,
 .media-card h3 {
     margin: 0;
     font-size: 1.1rem;
+}
+
+.media-card p,
+.media-card .foot {
+    margin: 0;
 }
 
 @media (max-width: 980px) {
@@ -1037,8 +1043,7 @@ footer {
 
     .hero-copy,
     .card,
-    .overview,
-    footer {
+    .overview {
         padding: 20px;
     }
 
@@ -1252,7 +1257,6 @@ header,
 .kpi,
 .feature,
 .faq-item,
-footer,
 .pill,
 .code,
 #code-section,
