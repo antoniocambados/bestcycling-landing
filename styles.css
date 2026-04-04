@@ -76,7 +76,6 @@ html {
         linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, .01)),
         linear-gradient(180deg, rgba(83, 117, 255, .03), rgba(83, 117, 255, 0)),
         var(--card-cool-2);
-    --footer-bg: rgba(13, 16, 21, .8);
     --pill-bg: rgba(255, 255, 255, .03);
     --pill-text: #d7dee8;
     --promo-bg:
@@ -189,7 +188,6 @@ html {
         linear-gradient(180deg, rgba(255, 255, 255, .82), rgba(255, 255, 255, .62)),
         linear-gradient(180deg, rgba(255, 122, 0, .04), rgba(255, 122, 0, 0)),
         var(--card-cool-2);
-    --footer-bg: rgba(255, 250, 244, .82);
     --pill-bg: rgba(255, 255, 255, .56);
     --pill-text: #4e5968;
     --promo-bg:
@@ -253,6 +251,7 @@ body {
     color: var(--text);
     background: var(--page-bg);
     background-repeat: no-repeat !important;
+    line-height: 1.58;
     transition: background .24s ease, color .24s ease;
 }
 
@@ -271,6 +270,36 @@ body::before {
 
 a {
     color: var(--brand);
+}
+
+p,
+ul,
+ol,
+li,
+blockquote {
+    line-height: inherit;
+    hyphens: auto;
+}
+
+h1 {
+    font-size: clamp(2.9rem, 7vw, 5.4rem);
+    line-height: .96;
+    letter-spacing: -.04em;
+    text-wrap: balance;
+}
+
+h2 {
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+    line-height: 1.12;
+}
+
+h3 {
+    font-size: 1.05rem;
+    line-height: 1.24;
+}
+
+p {
+    text-align: justify;
 }
 
 p:last-child {
@@ -360,6 +389,7 @@ header::after {
     border: 1px solid var(--line);
     box-shadow: var(--shadow);
     overflow: hidden;
+    container-type: inline-size;
 }
 
 .hero-copy::before {
@@ -376,11 +406,7 @@ header::after {
 }
 
 .hero h1 {
-    font-size: clamp(2.9rem, 7vw, 5.4rem);
-    line-height: .94;
     margin: 18px 0 18px;
-    letter-spacing: -.04em;
-    text-wrap: balance;
 }
 
 .hero .shadow-text {
@@ -390,22 +416,18 @@ header::after {
 
 .hero p {
     color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.72;
 }
 
 .hero p.hero-subtitle {
     color: unset;
     font-size: 2rem;
     font-weight: 700;
-    line-height: 0.94;
-}
-
-.hero .foot {
-    font-size: .9rem;
+    line-height: 1.05;
 }
 
 .card {
+    display: grid;
+    gap: 18px;
     background: var(--card-bg);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
@@ -413,6 +435,13 @@ header::after {
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
+    container-type: inline-size;
+}
+
+.card > * {
+    margin: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .card::before {
@@ -455,8 +484,10 @@ header::after {
 .cta {
     display: flex;
     gap: 12px;
-    margin-top: 18px;
+    margin: 1.5rem auto;
     flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
 }
 
 .highlight-text {
@@ -483,17 +514,18 @@ header::after {
 }
 
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     appearance: none;
     border: 0;
     border-radius: 16px;
     padding: 14px 20px;
     font-weight: 700;
     cursor: pointer;
-    font-size: .98rem;
     text-transform: uppercase;
     text-decoration: none;
-    letter-spacing: .08em;
+    text-align: center;
     transition: background-color .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease, color .18s ease;
 }
 
@@ -507,7 +539,13 @@ header::after {
 .btn-icon {
     width: 1.05rem;
     height: 1.05rem;
-    flex: 0 0 auto;
+}
+
+@container (min-width: 600px) {
+    .cta {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 .btn-primary {
@@ -552,7 +590,6 @@ header::after {
 
 .feature h3 {
     margin: 0 0 10px;
-    font-size: 1.05rem;
 }
 
 .how {
@@ -563,7 +600,6 @@ header::after {
 }
 
 .quote {
-    font-size: 1.05rem;
     color: var(--text);
     border-left: 4px solid var(--brand);
     padding-left: 14px;
@@ -573,7 +609,6 @@ header::after {
 .foot {
     font-size: .9rem;
     color: var(--muted);
-    line-height: 1.7;
 }
 
 .faq-card {
@@ -597,16 +632,47 @@ header::after {
 
 .faq-item h3 {
     margin: 0 0 10px;
-    font-size: 1.05rem;
 }
 
-footer {
-    margin: 28px 0 0;
-    padding: 26px 28px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    background: var(--footer-bg);
-    box-shadow: var(--shadow);
+.lead {
+    margin: 0 0 18px;
+    color: var(--text);
+    font-size: 1.1rem;
+}
+
+.split-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.bullet-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--muted);
+}
+
+.bullet-list li + li {
+    margin-top: 8px;
+}
+
+.ordered-list {
+    display: grid;
+    gap: 10px;
+}
+
+.content-card p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.content-card strong,
+.bullet-list strong {
+    color: var(--text);
+}
+
+.feature .bullet-list {
+    margin-top: 10px;
 }
 
 .pill {
@@ -841,7 +907,6 @@ footer {
 
 #code-section .feature h3 {
     margin-bottom: 6px;
-    font-size: .95rem;
 }
 
 #code-section .btn-primary {
@@ -869,7 +934,6 @@ footer {
 }
 
 #code-section h2:first-of-type {
-    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
     margin-bottom: 14px;
 }
 
@@ -879,8 +943,13 @@ footer {
     margin: 16px 0 20px;
 }
 
-.overview {
+.overview-stack {
     grid-area: overview;
+    display: grid;
+    gap: 24px;
+}
+
+.overview {
     padding: 28px;
 }
 
@@ -901,18 +970,11 @@ footer {
     gap: 24px;
 }
 
-.media-card {
-    display: grid;
+.card-media {
     gap: 16px;
     padding: 22px;
     border-radius: 22px;
-    border: 1px solid var(--line);
     background: var(--media-card-bg);
-}
-
-.media-card h3 {
-    margin: 0;
-    font-size: 1.1rem;
 }
 
 @media (max-width: 980px) {
@@ -939,6 +1001,10 @@ footer {
             "aside"
             "overview"
             "lower";
+    }
+
+    .split-grid {
+        grid-template-columns: 1fr;
     }
 
     #code-section {
@@ -984,14 +1050,12 @@ footer {
 
     .hero-copy,
     .card,
-    .overview,
-    footer {
+    .overview {
         padding: 20px;
     }
 
     .hero h1 {
         max-width: none;
-        font-size: clamp(2.4rem, 14vw, 4rem);
     }
 
     .grid {
@@ -1043,11 +1107,6 @@ footer {
     border: 2px solid var(--avatar-border);
     flex: 0 0 auto;
     box-shadow: var(--avatar-shadow);
-}
-
-.about-card h3 {
-    margin: 0 0 8px;
-    font-size: 1.35rem;
 }
 
 @media (max-width: 480px) {
@@ -1147,8 +1206,7 @@ footer {
     border-radius: 0.5rem;
     overflow: hidden;
     cursor: pointer;
-    background: #000;
-    box-shadow: 0 24px 42px rgba(0, 0, 0, .3);
+    background: var(--bg);
 }
 
 @media (max-width: 480px) {
@@ -1199,7 +1257,6 @@ header,
 .kpi,
 .feature,
 .faq-item,
-footer,
 .pill,
 .code,
 #code-section,
