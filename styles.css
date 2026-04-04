@@ -275,7 +275,8 @@ a {
 p,
 ul,
 ol,
-li {
+li,
+blockquote {
     line-height: inherit;
     hyphens: auto;
 }
@@ -388,6 +389,7 @@ header::after {
     border: 1px solid var(--line);
     box-shadow: var(--shadow);
     overflow: hidden;
+    container-type: inline-size;
 }
 
 .hero-copy::before {
@@ -433,6 +435,7 @@ header::after {
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
+    container-type: inline-size;
 }
 
 .card > * {
@@ -484,6 +487,7 @@ header::after {
     margin: 1.5rem auto;
     flex-wrap: wrap;
     flex-direction: column;
+    width: 100%;
 }
 
 .highlight-text {
@@ -510,7 +514,9 @@ header::after {
 }
 
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     appearance: none;
     border: 0;
     border-radius: 16px;
@@ -519,7 +525,7 @@ header::after {
     cursor: pointer;
     text-transform: uppercase;
     text-decoration: none;
-    letter-spacing: .08em;
+    text-align: center;
     transition: background-color .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease, color .18s ease;
 }
 
@@ -533,7 +539,13 @@ header::after {
 .btn-icon {
     width: 1.05rem;
     height: 1.05rem;
-    flex: 0 0 auto;
+}
+
+@container (min-width: 600px) {
+    .cta {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 .btn-primary {
